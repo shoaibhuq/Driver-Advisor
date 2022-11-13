@@ -142,7 +142,7 @@ struct ARViewContainer: UIViewRepresentable {
         }
         
         func classifyResults(_ results: [Any]) {
-            if Date.now.timeIntervalSince(resultTime) > 1 {
+            if Date.now.timeIntervalSince(resultTime) > 0.5 {
                 for observation in results where observation is VNRecognizedObjectObservation {
                     guard let objectObservation = observation as? VNRecognizedObjectObservation else {
                         continue
@@ -163,7 +163,7 @@ struct ARViewContainer: UIViewRepresentable {
                         if scannedResults.signType != .stopSign {
                             scannedResults.signType = .stopSign
                             scannedResults.severity = .warning
-                            speechController.speak(text: "Stop sign ahead", urgency: .warning)
+                            speechController.speak(text: "Stop sign", urgency: .warning)
                         }
                     case "R5-1":
                         if scannedResults.signType != .doNotEnter {

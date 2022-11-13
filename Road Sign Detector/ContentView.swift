@@ -36,7 +36,9 @@ struct ContentView: View {
                     } else {
                         Spacer()
                     }
-                    Button("Done Driving", action: {self.presentationMode.wrappedValue.dismiss()})
+                    Button("Done Driving", action: {self.presentationMode.wrappedValue.dismiss()
+                        
+                    })
                         .frame(width: 200, height: 70)
                         .background(.red)
                         .cornerRadius(20)

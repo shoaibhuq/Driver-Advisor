@@ -77,6 +77,7 @@ struct StringTable {
         "No U-Turn ahead":["es-MX":"No hay vuelta en U por delante","zh-CN":"前面不能掉头"],
         "One Way road":["es-MX":"Calle de un único sentido", "zh-CN":"《一条路》"],
         "Traffic light ahead":["es-MX":"Semáforo adelante", "zh-CN":"前方的红绿灯"],
-        "Stop sign ahead":["es-MX":"Señal de alto más adelante", "zh-CN":"提前停止标志"]
+        "Stop sign ahead":["es-MX":"Señal de alto más adelante", "zh-CN":"提前停止标志"],
+        "Stop sign":["es-MX":"señal de stop", "zh-CN":"停止标志"]
     ]
 }
