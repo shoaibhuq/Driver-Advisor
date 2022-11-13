@@ -4,7 +4,7 @@
 //
 //  Created by Jake Spann on 11/12/22.
 //
-
+/*
 import UIKit
 import AVFoundation
 import Vision
@@ -255,7 +255,7 @@ class TrafficSignRecognitionViewController: UIViewController, AVCaptureVideoData
                 timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: {timer in
                     print("timer expired!!")
                     //self.makeWarning()
-                    self.speechController.speak(text: "Drowsiness Detected", urgency: .hazard)
+                    self.speechController.speak(text: "Como Estas", urgency: .hazard, language: "es-MX")
                     //session.pause()
                 })
                // RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
@@ -304,29 +304,6 @@ class TrafficSignRecognitionViewController: UIViewController, AVCaptureVideoData
     }
 }
 
-enum SignType: String {
-    case pedestrianCrossing = "Pedestrian Crossing"
-    case stopSign = "Stop Sign"
-    case doNotEnter = "Do Not Enter"
-    case yield = "Yield"
-    case spdlmt40 = "Speed Limit 40"
-    case speedLimit25 = "Speed Limit 25"
-    case noUTurn = "No U-Turn"
-    case oneWay = "One Way"
-    case empty
-}
 
-enum SignClass {
-    case warning
-}
 
-class ScannedResults: ObservableObject, Equatable {
-    static func == (lhs: ScannedResults, rhs: ScannedResults) -> Bool {
-        return lhs.currentSign == rhs.currentSign
-    }
-    
-    @Published var currentSign: SignType?
-    @Published var signName: String?
-    @Published var signGlass : SignClass?
-}
-
+*/

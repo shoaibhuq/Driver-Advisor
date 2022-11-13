@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct Road_Sign_DetectorApp: App {
+    @AppStorage("firstRun") var isFirstRun: Bool = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isFirstRun {
+                WelcomeFormView()
+            } else {
+                ContentView()
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ import AVFAudio
 class SpeechManger {
     let synthesizer = AVSpeechSynthesizer()
     
-    func speak(text: String, urgency: SpeechUrgency) {
+    func speak(text: String, urgency: SpeechUrgency, language: String = "en-US") {
            do {
                try AVAudioSession.sharedInstance().setCategory(.playback,mode: .default)
 
@@ -36,7 +36,7 @@ class SpeechManger {
             utterance.volume = 0.8
             
             // Retrieve the US English voice.
-            let voice = AVSpeechSynthesisVoice(language: "en-US")
+            let voice = AVSpeechSynthesisVoice(language: language)
             
             // Assign the voice to the utterance.
             utterance.voice = voice

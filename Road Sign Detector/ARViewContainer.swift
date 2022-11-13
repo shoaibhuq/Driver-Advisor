@@ -139,7 +139,7 @@ struct ARViewContainer: UIViewRepresentable {
                     DispatchQueue.main.async(execute: {
                         // perform all the UI updates on the main queue
                         if let results = request.results {
-                            self.drawVisionRequestResults(results)
+                            self.classifyResults(results)
                         }
                     })
                 })
@@ -151,7 +151,7 @@ struct ARViewContainer: UIViewRepresentable {
             return error
         }
         
-        func drawVisionRequestResults(_ results: [Any]) {
+        func classifyResults(_ results: [Any]) {
             //detectionOverlay.sublayers = nil // remove all the old recognized objects
             for observation in results where observation is VNRecognizedObjectObservation {
                 guard let objectObservation = observation as? VNRecognizedObjectObservation else {
@@ -215,24 +215,7 @@ struct ARViewContainer: UIViewRepresentable {
                 default:
                     print(topLabelObservation.identifier)
                 }
-                /*if topLabelObservation.identifier == "W11-2" {
-                    print("FOUND SIgn!")
-                    detectedResults.signName = "Ped cross"
-                    detectedResults.currentSign = .pedestrianCrossing
-                    detectedResults.objectWillChange.send()
-                    print(detectedResults.signName)
-                }*/
-                
-               // let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
-                
-              /*  let textLayer = self.createTextSubLayerInBounds(objectBounds,
-                                                                identifier: topLabelObservation.identifier,
-                                                                confidence: topLabelObservation.confidence)*/
-               // shapeLayer.addSublayer(textLayer)
-               // detectionOverlay.addSublayer(shapeLayer)
             }
-            //self.updateLayerGeometry()
-         //   CATransaction.commit()
         }
         
         func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
@@ -240,16 +223,12 @@ struct ARViewContainer: UIViewRepresentable {
                 guard let faceAnchor = anchor as? ARFaceAnchor else { return }
                 let left = faceAnchor.blendShapes[.eyeBlinkLeft]
                 let right = faceAnchor.blendShapes[.eyeBlinkRight]
-                //print(left?.doubleValue)
-                //print(right?.doubleValue)
                 if timer == nil && ((left?.doubleValue ?? 0.0 >= 0.8) || (right?.doubleValue ?? 0.0 >= 0.8)) {
                     timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: {timer in
                         print("timer expired!!")
-                        //self.makeWarning()
                         self.speechController.speak(text: "Drowsiness Detected", urgency: .hazard)
-                        //session.pause()
                     })
-                   // RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
+                    RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
                 } else if (timer != nil) && (left?.doubleValue ?? 1.0 <= 0.8) && (right?.doubleValue ?? 1.0 <= 0.8) {
                     timer?.invalidate()
                     timer = nil
@@ -275,4 +254,30 @@ enum SignSeverity {
     case informative
     case warning
     case critical
+}
+
+enum SignType: String {
+    case pedestrianCrossing = "Pedestrian Crossing"
+    case stopSign = "Stop Sign"
+    case doNotEnter = "Do Not Enter"
+    case yield = "Yield"
+    case spdlmt40 = "Speed Limit 40"
+    case speedLimit25 = "Speed Limit 25"
+    case noUTurn = "No U-Turn"
+    case oneWay = "One Way"
+    case empty
+}
+
+enum SignClass {
+    case warning
+}
+
+class ScannedResults: ObservableObject, Equatable {
+    static func == (lhs: ScannedResults, rhs: ScannedResults) -> Bool {
+        return lhs.currentSign == rhs.currentSign
+    }
+    
+    @Published var currentSign: SignType?
+    @Published var signName: String?
+    @Published var signGlass : SignClass?
 }
