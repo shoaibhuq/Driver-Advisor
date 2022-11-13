@@ -9,16 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var results: ScanResults = ScanResults(signType: .empty)
+    @State var displayedResult: ScanResults?
+    let timer = Timer.publish(every: 4, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
             ARViewContainer(results: results)
                 .ignoresSafeArea(.all)
+                .onChange(of: results.signType, perform: {result in
+                    displayedResult = ScanResults(signType: result)
+                    displayedResult?.signType = result
+                })
             HStack {
                 Spacer()
                 VStack {
-                    if results.signType != .empty {
-                        WarningSign(severity: results.severity, text:  results.signType.rawValue ?? "NONE")
+                    if displayedResult != nil {
+                        WarningSign(severity: displayedResult!.severity, text:  results.signType.rawValue ?? "NONE")
+                            .onReceive(timer, perform: {output in
+                                withAnimation {
+                                    displayedResult = nil
+                                }
+                            })
                     } else {
                         Spacer()
                     }

@@ -42,6 +42,7 @@ struct ARViewContainer: UIViewRepresentable {
         var speechController = SpeechManger()
         var timer: Timer?
         private var scannedResults: ScanResults
+        var resultTime: Date = Date.now
         
         var parent: ARViewContainer
         
@@ -120,7 +121,7 @@ struct ARViewContainer: UIViewRepresentable {
         func setupVision() -> NSError? {
             let error: NSError! = nil
             
-            guard let modelURL = Bundle.main.url(forResource: "SignDetection3 1 Iteration 14220", withExtension: "mlmodelc") else {
+            guard let modelURL = Bundle.main.url(forResource: "SignDetection4 1", withExtension: "mlmodelc") else {
                 return NSError(domain: "VisionObjectRecognitionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
             }
             do {
@@ -141,69 +142,83 @@ struct ARViewContainer: UIViewRepresentable {
         }
         
         func classifyResults(_ results: [Any]) {
-            //detectionOverlay.sublayers = nil // remove all the old recognized objects
-            for observation in results where observation is VNRecognizedObjectObservation {
-                guard let objectObservation = observation as? VNRecognizedObjectObservation else {
-                    continue
-                }
-                // Select only the label with the highest confidence.
-                let topLabelObservation = objectObservation.labels[0]
-                let objectBounds = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(bufferSize.width), Int(bufferSize.height))
-                
-                print(topLabelObservation.identifier)
-                switch topLabelObservation.identifier {
-                case "W11-2":
-                    if scannedResults.signType != .pedestrianCrossing {
-                        scannedResults.signType = .pedestrianCrossing
-                        scannedResults.severity = .warning
-                        speechController.speak(text: "Caution, pedestrian crossing ahead", urgency: .warning)
-                        //print(parent.results.currentSign?.rawValue)
+            if Date.now.timeIntervalSince(resultTime) > 1 {
+                for observation in results where observation is VNRecognizedObjectObservation {
+                    guard let objectObservation = observation as? VNRecognizedObjectObservation else {
+                        continue
                     }
-                case "R1-1":
-                    if scannedResults.signType != .stopSign {
-                        scannedResults.signType = .stopSign
-                        scannedResults.severity = .warning
-                        speechController.speak(text: "Stop sign ahead", urgency: .warning)
-                    }
-                case "R5-1":
-                    if scannedResults.signType != .doNotEnter {
-                        scannedResults.signType = .doNotEnter
-                        scannedResults.severity = .informative
-                        speechController.speak(text: "Do not enter", urgency: .informative)
-                    }
-                case "R1-2":
-                    if scannedResults.signType != .yield {
-                        scannedResults.signType = .yield
-                        scannedResults.severity = .warning
-                        speechController.speak(text: "Caution, yield to oncoming traffic", urgency: .warning)
-                    }
-                case "R2-140":
-                    if scannedResults.signType != .spdlmt40 {
-                        scannedResults.signType = .spdlmt40
-                        scannedResults.severity = .informative
-                        speechController.speak(text: "Speed limit 40 miles per hour", urgency: .informative)
-                    }
-                case "R2-125":
-                    if scannedResults.signType != .speedLimit25 {
-                        scannedResults.signType = .speedLimit25
-                        scannedResults.severity = .informative
-                        speechController.speak(text: "Speed limit 25 miles per hour", urgency: .informative)
-                    }
-                case "R3-4":
-                    if scannedResults.signType != .noUTurn {
-                        scannedResults.signType = .noUTurn
-                        scannedResults.severity = .informative
-                        speechController.speak(text: "No U-Turn ahead", urgency: .informative)
-                    }
-                case "R6-1":
-                    if scannedResults.signType != .oneWay {
-                        scannedResults.signType = .oneWay
-                        scannedResults.severity = .informative
-                        speechController.speak(text: "One Way road", urgency: .informative)
-                    }
-                default:
+                    // Select only the label with the highest confidence.
+                    let topLabelObservation = objectObservation.labels[0]
+                    let objectBounds = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(bufferSize.width), Int(bufferSize.height))
+                    
                     print(topLabelObservation.identifier)
+                    switch topLabelObservation.identifier {
+                    case "W11-2":
+                        if scannedResults.signType != .pedestrianCrossing {
+                            scannedResults.signType = .pedestrianCrossing
+                            scannedResults.severity = .warning
+                            speechController.speak(text: "Caution, pedestrian crossing ahead", urgency: .warning)
+                            //print(parent.results.currentSign?.rawValue)
+                        }
+                    case "R1-1":
+                        if scannedResults.signType != .stopSign {
+                            scannedResults.signType = .stopSign
+                            scannedResults.severity = .warning
+                            speechController.speak(text: "Stop sign ahead", urgency: .warning)
+                        }
+                    case "R5-1":
+                        if scannedResults.signType != .doNotEnter {
+                            scannedResults.signType = .doNotEnter
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "Do not enter", urgency: .informative)
+                        }
+                    case "R1-2":
+                        if scannedResults.signType != .yield {
+                            scannedResults.signType = .yield
+                            scannedResults.severity = .warning
+                            speechController.speak(text: "Caution, yield to other traffic", urgency: .warning)
+                        }
+                    case "R2-140":
+                        if scannedResults.signType != .spdlmt40 {
+                            scannedResults.signType = .spdlmt40
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "Speed limit 40 miles per hour", urgency: .informative)
+                        }
+                    case "R2-125":
+                        if scannedResults.signType != .speedLimit25 {
+                            scannedResults.signType = .speedLimit25
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "Speed limit 25 miles per hour", urgency: .informative)
+                        }
+                    case "R3-4":
+                        if scannedResults.signType != .noUTurn {
+                            scannedResults.signType = .noUTurn
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "No U-Turn ahead", urgency: .informative)
+                        }
+                    case "R6-1":
+                        if scannedResults.signType != .oneWay {
+                            scannedResults.signType = .oneWay
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "One Way road", urgency: .informative)
+                        }
+                    case "W3-3":
+                        if scannedResults.signType != .trafficLightAhead {
+                            scannedResults.signType = .trafficLightAhead
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "Traffic light ahead", urgency: .informative)
+                        }
+                    case "W3-1":
+                        if scannedResults.signType != .stopSignAhead {
+                            scannedResults.signType = .stopSignAhead
+                            scannedResults.severity = .informative
+                            speechController.speak(text: "Stop sign ahead", urgency: .informative)
+                        }
+                    default:
+                        print(topLabelObservation.identifier)
+                    }
                 }
+                resultTime = Date.now
             }
         }
         
@@ -229,7 +244,11 @@ struct ARViewContainer: UIViewRepresentable {
     }
 }
 
-class ScanResults: ObservableObject {
+class ScanResults: ObservableObject, Equatable {
+    static func == (lhs: ScanResults, rhs: ScanResults) -> Bool {
+        lhs.signType == rhs.signType
+    }
+    
     @Published var signType: SignType
     @Published var severity: SignSeverity
     
@@ -254,6 +273,8 @@ enum SignType: String {
     case speedLimit25 = "Speed Limit 25"
     case noUTurn = "No U-Turn"
     case oneWay = "One Way"
+    case trafficLightAhead = "Traffic light ahead"
+    case stopSignAhead = "Stop sign ahead"
     case empty
 }
 
