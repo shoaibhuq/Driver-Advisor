@@ -36,7 +36,7 @@ class SpeechManger {
             utterance.volume = 0.8
             
             // Retrieve the US English voice.
-            let voice = AVSpeechSynthesisVoice(language: "en-GB")
+            let voice = AVSpeechSynthesisVoice(language: "en-US")
             
             // Assign the voice to the utterance.
             utterance.voice = voice

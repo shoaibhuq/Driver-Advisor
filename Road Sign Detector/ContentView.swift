@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var results: ScanResults = ScanResults(signType: .doNotEnter)
+    @ObservedObject var results: ScanResults = ScanResults(signType: .empty)
     
     var body: some View {
         ZStack {
@@ -19,7 +19,22 @@ struct ContentView: View {
                     .padding()
                     .background(.regularMaterial)*/
                 Spacer()
-                WarningSign(critical: true, text:  results.signType.rawValue ?? "NONE")
+                VStack {
+                    if results.signType != .empty {
+                        WarningSign(severity: results.severity, text:  results.signType.rawValue ?? "NONE")
+                    } else {
+                        Spacer()
+                    }
+                    Button("Done Driving", action: {})
+                        .frame(width: 200, height: 70)
+                        .background(.red)
+                        .cornerRadius(20)
+                       // .buttonStyle(.borderedProminent)
+                        .tint(.white)
+                        //.controlSize(.large)
+                        .opacity(0.8)
+                        .padding()
+                }
             }
         }
     }

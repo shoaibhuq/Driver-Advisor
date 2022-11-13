@@ -166,45 +166,51 @@ struct ARViewContainer: UIViewRepresentable {
                 case "W11-2":
                     if scannedResults.signType != .pedestrianCrossing {
                         scannedResults.signType = .pedestrianCrossing
-                        //parent.results.signName = "TEST"
-                       // parent.results.objectWillChange.send()
+                        scannedResults.severity = .warning
                         speechController.speak(text: "Caution, pedestrian crossing ahead", urgency: .warning)
                         //print(parent.results.currentSign?.rawValue)
                     }
                 case "R1-1":
                     if scannedResults.signType != .stopSign {
                         scannedResults.signType = .stopSign
+                        scannedResults.severity = .warning
                         speechController.speak(text: "Stop sign ahead", urgency: .warning)
                     }
                 case "R5-1":
                     if scannedResults.signType != .doNotEnter {
                         scannedResults.signType = .doNotEnter
+                        scannedResults.severity = .informative
                         speechController.speak(text: "Do not enter", urgency: .informative)
                     }
                 case "R1-2":
                     if scannedResults.signType != .yield {
                         scannedResults.signType = .yield
+                        scannedResults.severity = .warning
                         speechController.speak(text: "Caution, yield to oncoming traffic", urgency: .warning)
                     }
                 case "R2-140":
                     if scannedResults.signType != .spdlmt40 {
                         scannedResults.signType = .spdlmt40
-                        //speechController.speak(text: "Caution, yield to oncoming traffic", urgency: .warning)
+                        scannedResults.severity = .informative
+                        speechController.speak(text: "Speed limit 40 miles per hour", urgency: .informative)
                     }
                 case "R2-125":
                     if scannedResults.signType != .speedLimit25 {
                         scannedResults.signType = .speedLimit25
-                        //speechController.speak(text: "Caution, yield to oncoming traffic", urgency: .warning)
+                        scannedResults.severity = .informative
+                        speechController.speak(text: "Speed limit 25 miles per hour", urgency: .informative)
                     }
                 case "R3-4":
                     if scannedResults.signType != .noUTurn {
                         scannedResults.signType = .noUTurn
-                        //speechController.speak(text: "Caution, yield to oncoming traffic", urgency: .warning)
+                        scannedResults.severity = .informative
+                        speechController.speak(text: "No U-Turn ahead", urgency: .informative)
                     }
                 case "R6-1":
                     if scannedResults.signType != .oneWay {
                         scannedResults.signType = .oneWay
-                        //speechController.speak(text: "Caution, yield to oncoming traffic", urgency: .warning)
+                        scannedResults.severity = .informative
+                        speechController.speak(text: "One Way road", urgency: .informative)
                     }
                 default:
                     print(topLabelObservation.identifier)
@@ -257,8 +263,16 @@ struct ARViewContainer: UIViewRepresentable {
 
 class ScanResults: ObservableObject {
     @Published var signType: SignType
+    @Published var severity: SignSeverity
     
     init(signType: SignType) {
         self.signType = signType
+        self.severity = .warning
     }
+}
+
+enum SignSeverity {
+    case informative
+    case warning
+    case critical
 }

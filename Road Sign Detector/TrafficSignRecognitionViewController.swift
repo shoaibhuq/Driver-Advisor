@@ -313,6 +313,7 @@ enum SignType: String {
     case speedLimit25 = "Speed Limit 25"
     case noUTurn = "No U-Turn"
     case oneWay = "One Way"
+    case empty
 }
 
 enum SignClass {
