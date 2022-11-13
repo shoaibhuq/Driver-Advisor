@@ -11,23 +11,31 @@ struct ProfileEditorView: View {
     @AppStorage("userName") var userName: String = "John"
     @AppStorage("userAge") var userAge: String = "20"
     @AppStorage("carMakeModel") var carMakeModel: String = "Toyota Supra"
-    @AppStorage("language") var language: String = "en-US"
+    @AppStorage("language") var language: String = "English"
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        NavigationView {
+        //NavigationView {
             VStack {
                 FormTextField(text: $userName, title: "Name")
                 FormTextField(text: $userAge, title: "Age")
                 FormTextField(text: $carMakeModel, title: "Car")
-                FormTextField(text: $language, title: "Language")
+                //FormTextField(text: $language, title: "Language")
+                FormPicker(selected: $language, options: ["English", "Spanish", "Chinese"], title: "Language")
                 Spacer()
             }
+            .navigationBarBackButtonHidden(true)
             .padding(.top, 60)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        Image(systemName: "arrow.left")
-                        Text("Profile")
+                       // NavigationLink(destination: {ContentView()}, label: {
+                        Button(action: {self.presentationMode.wrappedValue.dismiss()}, label: {
+                            Image(systemName: "arrow.left")
+                            Text("Profile")
+                        })
+                            
+                       // })
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
@@ -37,7 +45,7 @@ struct ProfileEditorView: View {
                         }
                     }
                 }
-            }
+          //  }
         }
     }
 }

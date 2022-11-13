@@ -12,7 +12,7 @@ struct WelcomeFormView: View {
     @AppStorage("userName") var userName: String = "John"
     @AppStorage("userAge") var userAge: String = "20"
     @AppStorage("carMakeModel") var carMakeModel: String = "Toyota Supra"
-    @AppStorage("language") var language: String = "en-US"
+    @AppStorage("language") var language: String = "English"
     
     var body: some View {
 //        NavigationView {
@@ -26,7 +26,8 @@ struct WelcomeFormView: View {
                     FormTextField(text: $userName, title: "Name")
                     FormTextField(text: $userAge, title: "Age")
                     FormTextField(text: $carMakeModel, title: "Car")
-                    FormTextField(text: $language, title: "Language")
+                    //FormTextField(text: $language, title: "Language")
+                    FormPicker(selected: $language, options: ["English", "Spanish", "Chinese"], title: "Language")
                     Spacer()
                 }
                 
@@ -65,6 +66,37 @@ struct FormTextField: View {
                     .textFieldStyle(.plain)
                     .foregroundColor(.black)
                     .padding()
+            }
+        }
+        .padding(.horizontal, 10)
+    }
+}
+
+struct FormPicker: View {
+    @Binding var selected: String
+    var options: [String]
+    var title: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text(title)
+                    .font(.system(size: 25, weight: .bold))
+                Spacer()
+            }
+            .padding(.bottom, -5)
+            ZStack {
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color(red: 217, green: 217, blue: 217))
+                    .frame(height: 40)
+                HStack {
+                    Picker(title, selection: $selected, content: {
+                        ForEach(options, id: \.self) {option in
+                            Text(option)
+                        }
+                    })
+                    Spacer()
+                }
             }
         }
         .padding(.horizontal, 10)

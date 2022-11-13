@@ -158,7 +158,6 @@ struct ARViewContainer: UIViewRepresentable {
                             scannedResults.signType = .pedestrianCrossing
                             scannedResults.severity = .warning
                             speechController.speak(text: "Caution, pedestrian crossing ahead", urgency: .warning)
-                            //print(parent.results.currentSign?.rawValue)
                         }
                     case "R1-1":
                         if scannedResults.signType != .stopSign {
@@ -229,7 +228,6 @@ struct ARViewContainer: UIViewRepresentable {
                 let right = faceAnchor.blendShapes[.eyeBlinkRight]
                 if timer == nil && ((left?.doubleValue ?? 0.0 >= 0.8) || (right?.doubleValue ?? 0.0 >= 0.8)) {
                     timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: {timer in
-                        //print("timer expired!!")
                         self.speechController.speak(text: "Please be sure to keep your attention on the road", urgency: .hazard)
                     })
                     RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)

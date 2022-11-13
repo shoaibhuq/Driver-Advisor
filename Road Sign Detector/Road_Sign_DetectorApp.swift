@@ -19,8 +19,9 @@ struct Road_Sign_DetectorApp: App {
                 //WelcomeFormView()
             } else {
                 //IntroView()
+                HomeView()
                 //ProfileEditorView()
-                ContentView()
+                //ContentView()
             }
         }
     }

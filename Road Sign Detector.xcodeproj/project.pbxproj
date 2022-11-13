@@ -20,6 +20,8 @@
 		23F9F8A2292131DA00E36C6E /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A1292131DA00E36C6E /* IntroView.swift */; };
 		23F9F8A42921328B00E36C6E /* SignDetection4 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A32921328B00E36C6E /* SignDetection4 1.mlmodel */; };
 		23F9F8A62921329300E36C6E /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A52921329300E36C6E /* ColorExtensions.swift */; };
+		23F9F8A82921491900E36C6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A72921491900E36C6E /* HomeView.swift */; };
+		23F9F8AA29214B5200E36C6E /* OrientationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A929214B5200E36C6E /* OrientationModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		23F9F8A1292131DA00E36C6E /* IntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		23F9F8A32921328B00E36C6E /* SignDetection4 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "SignDetection4 1.mlmodel"; sourceTree = "<group>"; };
 		23F9F8A52921329300E36C6E /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		23F9F8A72921491900E36C6E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		23F9F8A929214B5200E36C6E /* OrientationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +77,9 @@
 				23F9F8A32921328B00E36C6E /* SignDetection4 1.mlmodel */,
 				233AECA12920D6D500036360 /* Road_Sign_DetectorApp.swift */,
 				233AECA32920D6D500036360 /* ContentView.swift */,
+				23F9F8A929214B5200E36C6E /* OrientationModifier.swift */,
 				236699962920FBE2006E49C2 /* WarningSign.swift */,
+				23F9F8A72921491900E36C6E /* HomeView.swift */,
 				236699922920E8F5006E49C2 /* SpeechManager.swift */,
 				233AECAF2920D78000036360 /* ARViewContainer.swift */,
 				23669998292107B8006E49C2 /* WelcomeFormView.swift */,
@@ -173,6 +179,8 @@
 				23669999292107B8006E49C2 /* WelcomeFormView.swift in Sources */,
 				236699972920FBE2006E49C2 /* WarningSign.swift in Sources */,
 				233AECB02920D78000036360 /* ARViewContainer.swift in Sources */,
+				23F9F8AA29214B5200E36C6E /* OrientationModifier.swift in Sources */,
+				23F9F8A82921491900E36C6E /* HomeView.swift in Sources */,
 				233AECA22920D6D500036360 /* Road_Sign_DetectorApp.swift in Sources */,
 				23F9F8A62921329300E36C6E /* ColorExtensions.swift in Sources */,
 			);

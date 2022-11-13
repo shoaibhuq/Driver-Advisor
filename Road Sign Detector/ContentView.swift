@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var results: ScanResults = ScanResults(signType: .empty)
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @State var displayedResult: ScanResults?
     let timer = Timer.publish(every: 4, on: .main, in: .common).autoconnect()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         ZStack {
@@ -20,6 +22,7 @@ struct ContentView: View {
                     displayedResult = ScanResults(signType: result)
                     displayedResult?.signType = result
                 })
+                .blur(radius: verticalSizeClass == .regular ? 10 : 0)
             HStack {
                 Spacer()
                 VStack {
@@ -33,7 +36,7 @@ struct ContentView: View {
                     } else {
                         Spacer()
                     }
-                    Button("Done Driving", action: {})
+                    Button("Done Driving", action: {self.presentationMode.wrappedValue.dismiss()})
                         .frame(width: 200, height: 70)
                         .background(.red)
                         .cornerRadius(20)
@@ -45,6 +48,18 @@ struct ContentView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden()
+        .overlay {
+            if verticalSizeClass == .regular {
+                Text("Please rotate device")
+                    .font(.system(size: 30))
+                    .multilineTextAlignment(.center)
+                    .frame(width: 300, height: 200)
+                    .background(Material.regular)
+                    .cornerRadius(20)
+            }
+        }
+        
     }
 }
 
