@@ -16,7 +16,8 @@ struct Road_Sign_DetectorApp: App {
             if isFirstRun {
                 WelcomeFormView()
             } else {
-                ContentView()
+                //ContentView()
+                ProfileEditorView()
             }
         }
     }

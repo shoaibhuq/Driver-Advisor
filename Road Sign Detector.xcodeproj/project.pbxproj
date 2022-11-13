@@ -17,6 +17,7 @@
 		236699952920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 236699942920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel */; };
 		236699972920FBE2006E49C2 /* WarningSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236699962920FBE2006E49C2 /* WarningSign.swift */; };
 		23669999292107B8006E49C2 /* WelcomeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23669998292107B8006E49C2 /* WelcomeFormView.swift */; };
+		2366999B29210F31006E49C2 /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2366999A29210F31006E49C2 /* ProfileEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		236699942920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "SignDetection3 1 Iteration 14220.mlmodel"; sourceTree = "<group>"; };
 		236699962920FBE2006E49C2 /* WarningSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSign.swift; sourceTree = "<group>"; };
 		23669998292107B8006E49C2 /* WelcomeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFormView.swift; sourceTree = "<group>"; };
+		2366999A29210F31006E49C2 /* ProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				236699922920E8F5006E49C2 /* SpeechManager.swift */,
 				233AECAF2920D78000036360 /* ARViewContainer.swift */,
 				23669998292107B8006E49C2 /* WelcomeFormView.swift */,
+				2366999A29210F31006E49C2 /* ProfileEditorView.swift */,
 				233AECA52920D6D700036360 /* Assets.xcassets */,
 				233AECA72920D6D700036360 /* Preview Content */,
 			);
@@ -158,6 +161,7 @@
 				236699952920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel in Sources */,
 				233AECA42920D6D500036360 /* ContentView.swift in Sources */,
 				236699932920E8F6006E49C2 /* SpeechManager.swift in Sources */,
+				2366999B29210F31006E49C2 /* ProfileEditorView.swift in Sources */,
 				23669999292107B8006E49C2 /* WelcomeFormView.swift in Sources */,
 				236699972920FBE2006E49C2 /* WarningSign.swift in Sources */,
 				236699912920E83E006E49C2 /* TrafficSignRecognitionViewController.swift in Sources */,
