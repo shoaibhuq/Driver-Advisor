@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var results: ScanResults = ScanResults(signType: .doNotEnter)
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            ARViewContainer(results: results)
+                .ignoresSafeArea(.all)
+            HStack {
+               /* Text(results.signType.rawValue ?? "None")
+                    .padding()
+                    .background(.regularMaterial)*/
+                Spacer()
+                WarningSign(critical: true, text:  results.signType.rawValue ?? "NONE")
+            }
         }
-        .padding()
     }
 }
 

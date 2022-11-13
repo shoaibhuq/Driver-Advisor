@@ -11,6 +11,11 @@
 		233AECA42920D6D500036360 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233AECA32920D6D500036360 /* ContentView.swift */; };
 		233AECA62920D6D700036360 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 233AECA52920D6D700036360 /* Assets.xcassets */; };
 		233AECA92920D6D700036360 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 233AECA82920D6D700036360 /* Preview Assets.xcassets */; };
+		233AECB02920D78000036360 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233AECAF2920D78000036360 /* ARViewContainer.swift */; };
+		236699912920E83E006E49C2 /* TrafficSignRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236699902920E83E006E49C2 /* TrafficSignRecognitionViewController.swift */; };
+		236699932920E8F6006E49C2 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236699922920E8F5006E49C2 /* SpeechManager.swift */; };
+		236699952920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 236699942920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel */; };
+		236699972920FBE2006E49C2 /* WarningSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236699962920FBE2006E49C2 /* WarningSign.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		233AECA32920D6D500036360 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		233AECA52920D6D700036360 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		233AECA82920D6D700036360 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		233AECAF2920D78000036360 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		236699902920E83E006E49C2 /* TrafficSignRecognitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrafficSignRecognitionViewController.swift; sourceTree = "<group>"; };
+		236699922920E8F5006E49C2 /* SpeechManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
+		236699942920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "SignDetection3 1 Iteration 14220.mlmodel"; sourceTree = "<group>"; };
+		236699962920FBE2006E49C2 /* WarningSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSign.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +61,13 @@
 		233AECA02920D6D500036360 /* Road Sign Detector */ = {
 			isa = PBXGroup;
 			children = (
+				236699942920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel */,
 				233AECA12920D6D500036360 /* Road_Sign_DetectorApp.swift */,
 				233AECA32920D6D500036360 /* ContentView.swift */,
+				236699962920FBE2006E49C2 /* WarningSign.swift */,
+				236699902920E83E006E49C2 /* TrafficSignRecognitionViewController.swift */,
+				236699922920E8F5006E49C2 /* SpeechManager.swift */,
+				233AECAF2920D78000036360 /* ARViewContainer.swift */,
 				233AECA52920D6D700036360 /* Assets.xcassets */,
 				233AECA72920D6D700036360 /* Preview Content */,
 			);
@@ -137,7 +152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236699952920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel in Sources */,
 				233AECA42920D6D500036360 /* ContentView.swift in Sources */,
+				236699932920E8F6006E49C2 /* SpeechManager.swift in Sources */,
+				236699972920FBE2006E49C2 /* WarningSign.swift in Sources */,
+				236699912920E83E006E49C2 /* TrafficSignRecognitionViewController.swift in Sources */,
+				233AECB02920D78000036360 /* ARViewContainer.swift in Sources */,
 				233AECA22920D6D500036360 /* Road_Sign_DetectorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,11 +290,12 @@
 				DEVELOPMENT_TEAM = 9W7546BN3K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to detect road signs and monitor driver awareness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,11 +320,12 @@
 				DEVELOPMENT_TEAM = 9W7546BN3K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to detect road signs and monitor driver awareness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
