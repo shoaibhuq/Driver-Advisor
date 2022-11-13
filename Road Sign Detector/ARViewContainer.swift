@@ -11,41 +11,37 @@ import RealityKit
 import Combine
 
 struct ARViewContainer: UIViewRepresentable {
-    //typealias UIViewControllerType = MyViewController
     
     @ObservedObject var results: ScanResults
     
     func makeUIView(context: Context) -> ARView {
-           
-           let arView = context.coordinator.arView
-           
-           let primeAnchor = context.coordinator.primeAnchor
-           arView.scene.anchors.append(primeAnchor)
+        
+        let arView = context.coordinator.arView
+        
+        let primeAnchor = context.coordinator.primeAnchor
+        arView.scene.anchors.append(primeAnchor)
         
         let config = ARWorldTrackingConfiguration()
         
         config.userFaceTrackingEnabled = true
-       // let session = ARSession()
-        //print(ARWorldTrackingConfiguration.supportedVideoFormats)
-        //config.videoFormat = ARConfiguration.supportedVideoFormats
         arView.session.delegate = context.coordinator
         context.coordinator.setupVision()
-       arView.session.run(config)
-           
+        arView.session.run(config)
+        
         return arView
-           
-       }
+        
+    }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-           Coordinator(arView: ARView(frame: .zero),
-                       primeAnchor: AnchorEntity(plane: .horizontal), parent: self, results: results)
-       }
-       
+        Coordinator(arView: ARView(frame: .zero),
+                    primeAnchor: AnchorEntity(plane: .horizontal), parent: self, results: results)
+    }
+    
     class Coordinator: NSObject, ObservableObject, ARSessionDelegate {
-           var primeAnchor: AnchorEntity
-           var arView: ARView
+        var primeAnchor: AnchorEntity
+        var arView: ARView
         private var requests = [VNRequest]()
         var bufferSize: CGSize = .zero
         var speechController = SpeechManger()
@@ -53,43 +49,44 @@ struct ARViewContainer: UIViewRepresentable {
         private var scannedResults: ScanResults
         
         var parent: ARViewContainer
-           
-           var cancellables = Set<AnyCancellable>()
-           
+        
+        var cancellables = Set<AnyCancellable>()
+        
         init(arView: ARView, primeAnchor: AnchorEntity, parent: ARViewContainer, results: ScanResults) {
-               self.arView = arView
-               self.primeAnchor = primeAnchor
-               self.parent = parent
-               self.scannedResults = results
-               // Assuming you have a Star.reality file in your Resources area
-               //let realityFile = Bundle.main.url(forResource: "Star", withExtension: "reality")!
-               
-               super.init()
-           }
-           
-           func session(_ session: ARSession, didUpdate frame: ARFrame) {
-               let exifOrientation = exifOrientationFromDeviceOrientation()
-               
-               let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: frame.capturedImage, orientation: exifOrientation, options: [:])
-               do {
-                   try imageRequestHandler.perform(self.requests)
-               } catch {
-                   print(error)
-               }
-               
-               let requestHandler = VNImageRequestHandler(cvPixelBuffer: frame.capturedImage)
-
-               // Create a new request to recognize text.
-               let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
-               request.recognitionLevel = .fast
-
-               do {
-                   // Perform the text-recognition request.
-                //   try requestHandler.perform([request])
-               } catch {
-                   print("Unable to perform the requests: \(error).")
-               }
-           }
+            self.arView = arView
+            self.primeAnchor = primeAnchor
+            self.parent = parent
+            self.scannedResults = results
+            
+            super.init()
+        }
+        
+        // Process each frame
+        func session(_ session: ARSession, didUpdate frame: ARFrame) {
+            let exifOrientation = exifOrientationFromDeviceOrientation()
+            
+            let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: frame.capturedImage, orientation: exifOrientation, options: [:])
+            do {
+                try imageRequestHandler.perform(self.requests)
+            } catch {
+                print(error)
+            }
+            
+            /*
+             let requestHandler = VNImageRequestHandler(cvPixelBuffer: frame.capturedImage)
+             
+             // Create a new request to recognize text.
+             let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
+             request.recognitionLevel = .fast
+             
+             do {
+             // Perform the text-recognition request.
+             //   try requestHandler.perform([request])
+             } catch {
+             print("Unable to perform the requests: \(error).")
+             }
+             */
+        }
         
         func recognizeTextHandler(request: VNRequest, error: Error?) {
             guard let observations =
@@ -127,7 +124,6 @@ struct ARViewContainer: UIViewRepresentable {
         
         @discardableResult
         func setupVision() -> NSError? {
-            // Setup Vision parts
             let error: NSError! = nil
             
             guard let modelURL = Bundle.main.url(forResource: "SignDetection3 1 Iteration 14220", withExtension: "mlmodelc") else {
@@ -137,7 +133,6 @@ struct ARViewContainer: UIViewRepresentable {
                 let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
                 let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler: { (request, error) in
                     DispatchQueue.main.async(execute: {
-                        // perform all the UI updates on the main queue
                         if let results = request.results {
                             self.classifyResults(results)
                         }
@@ -225,8 +220,8 @@ struct ARViewContainer: UIViewRepresentable {
                 let right = faceAnchor.blendShapes[.eyeBlinkRight]
                 if timer == nil && ((left?.doubleValue ?? 0.0 >= 0.8) || (right?.doubleValue ?? 0.0 >= 0.8)) {
                     timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: {timer in
-                        print("timer expired!!")
-                        self.speechController.speak(text: "Drowsiness Detected", urgency: .hazard)
+                        //print("timer expired!!")
+                        self.speechController.speak(text: "Please be sure to keep your attention on the road", urgency: .hazard)
                     })
                     RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
                 } else if (timer != nil) && (left?.doubleValue ?? 1.0 <= 0.8) && (right?.doubleValue ?? 1.0 <= 0.8) {
@@ -237,8 +232,8 @@ struct ARViewContainer: UIViewRepresentable {
             }
         }
         
-       }
-   }
+    }
+}
 
 class ScanResults: ObservableObject {
     @Published var signType: SignType

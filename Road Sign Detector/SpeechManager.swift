@@ -24,9 +24,9 @@ class SpeechManger {
             
             switch urgency {
             case .warning:
-                utterance.rate = 0.55
+                utterance.rate = 0.54
             case .hazard:
-                utterance.rate = 0.56
+                utterance.rate = 0.55
             default:
                 break;
             }
