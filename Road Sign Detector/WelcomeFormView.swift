@@ -15,24 +15,26 @@ struct WelcomeFormView: View {
     @AppStorage("language") var language: String = "en-US"
     
     var body: some View {
-        VStack {
-            Text("Let us know a little about you")
-                .font(.system(size: 45, weight: .bold))
-                .padding(3)
-                .padding(.bottom, 50)
-            Spacer()
+//        NavigationView {
             VStack {
-                FormTextField(text: $userName, title: "Name")
-                FormTextField(text: $userAge, title: "Age")
-                FormTextField(text: $carMakeModel, title: "Car")
-                FormTextField(text: $language, title: "Language")
+                Text("Let us know a little about you")
+                    .font(.system(size: 45, weight: .bold))
+                    .padding(3)
+                    .padding(.bottom, 50)
                 Spacer()
+                VStack {
+                    FormTextField(text: $userName, title: "Name")
+                    FormTextField(text: $userAge, title: "Age")
+                    FormTextField(text: $carMakeModel, title: "Car")
+                    FormTextField(text: $language, title: "Language")
+                    Spacer()
+                }
+                
+                Button("Continue") {
+                    isFirstRun = false
+                }
             }
-            
-            Button("Continue") {
-                isFirstRun = false
-            }
-        }
+        .navigationBarBackButtonHidden()
         //.background(Color(red: 44, green: 43, blue: 52))
     }
 }

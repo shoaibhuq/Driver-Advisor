@@ -14,10 +14,13 @@ struct Road_Sign_DetectorApp: App {
     var body: some Scene {
         WindowGroup {
             if isFirstRun {
-                WelcomeFormView()
+                IntroView()
+                    .preferredColorScheme(.dark)
+                //WelcomeFormView()
             } else {
-                ContentView()
+                //IntroView()
                 //ProfileEditorView()
+                ContentView()
             }
         }
     }

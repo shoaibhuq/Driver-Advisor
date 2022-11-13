@@ -15,9 +15,6 @@ struct ContentView: View {
             ARViewContainer(results: results)
                 .ignoresSafeArea(.all)
             HStack {
-               /* Text(results.signType.rawValue ?? "None")
-                    .padding()
-                    .background(.regularMaterial)*/
                 Spacer()
                 VStack {
                     if results.signType != .empty {

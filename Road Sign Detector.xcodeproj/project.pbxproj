@@ -18,6 +18,9 @@
 		236699972920FBE2006E49C2 /* WarningSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236699962920FBE2006E49C2 /* WarningSign.swift */; };
 		23669999292107B8006E49C2 /* WelcomeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23669998292107B8006E49C2 /* WelcomeFormView.swift */; };
 		2366999B29210F31006E49C2 /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2366999A29210F31006E49C2 /* ProfileEditorView.swift */; };
+		23F9F8A2292131DA00E36C6E /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A1292131DA00E36C6E /* IntroView.swift */; };
+		23F9F8A42921328B00E36C6E /* SignDetection4 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A32921328B00E36C6E /* SignDetection4 1.mlmodel */; };
+		23F9F8A62921329300E36C6E /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F9F8A52921329300E36C6E /* ColorExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		236699962920FBE2006E49C2 /* WarningSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSign.swift; sourceTree = "<group>"; };
 		23669998292107B8006E49C2 /* WelcomeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFormView.swift; sourceTree = "<group>"; };
 		2366999A29210F31006E49C2 /* ProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorView.swift; sourceTree = "<group>"; };
+		23F9F8A1292131DA00E36C6E /* IntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		23F9F8A32921328B00E36C6E /* SignDetection4 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "SignDetection4 1.mlmodel"; sourceTree = "<group>"; };
+		23F9F8A52921329300E36C6E /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				236699942920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel */,
+				23F9F8A32921328B00E36C6E /* SignDetection4 1.mlmodel */,
 				233AECA12920D6D500036360 /* Road_Sign_DetectorApp.swift */,
 				233AECA32920D6D500036360 /* ContentView.swift */,
 				236699962920FBE2006E49C2 /* WarningSign.swift */,
@@ -73,6 +80,8 @@
 				236699922920E8F5006E49C2 /* SpeechManager.swift */,
 				233AECAF2920D78000036360 /* ARViewContainer.swift */,
 				23669998292107B8006E49C2 /* WelcomeFormView.swift */,
+				23F9F8A1292131DA00E36C6E /* IntroView.swift */,
+				23F9F8A52921329300E36C6E /* ColorExtensions.swift */,
 				2366999A29210F31006E49C2 /* ProfileEditorView.swift */,
 				233AECA52920D6D700036360 /* Assets.xcassets */,
 				233AECA72920D6D700036360 /* Preview Content */,
@@ -161,12 +170,15 @@
 				236699952920ECBE006E49C2 /* SignDetection3 1 Iteration 14220.mlmodel in Sources */,
 				233AECA42920D6D500036360 /* ContentView.swift in Sources */,
 				236699932920E8F6006E49C2 /* SpeechManager.swift in Sources */,
+				23F9F8A2292131DA00E36C6E /* IntroView.swift in Sources */,
+				23F9F8A42921328B00E36C6E /* SignDetection4 1.mlmodel in Sources */,
 				2366999B29210F31006E49C2 /* ProfileEditorView.swift in Sources */,
 				23669999292107B8006E49C2 /* WelcomeFormView.swift in Sources */,
 				236699972920FBE2006E49C2 /* WarningSign.swift in Sources */,
 				236699912920E83E006E49C2 /* TrafficSignRecognitionViewController.swift in Sources */,
 				233AECB02920D78000036360 /* ARViewContainer.swift in Sources */,
 				233AECA22920D6D500036360 /* Road_Sign_DetectorApp.swift in Sources */,
+				23F9F8A62921329300E36C6E /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

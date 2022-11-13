@@ -18,9 +18,6 @@ struct ARViewContainer: UIViewRepresentable {
         
         let arView = context.coordinator.arView
         
-        let primeAnchor = context.coordinator.primeAnchor
-        arView.scene.anchors.append(primeAnchor)
-        
         let config = ARWorldTrackingConfiguration()
         
         config.userFaceTrackingEnabled = true
@@ -35,12 +32,10 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(arView: ARView(frame: .zero),
-                    primeAnchor: AnchorEntity(plane: .horizontal), parent: self, results: results)
+        Coordinator(arView: ARView(frame: .zero), parent: self, results: results)
     }
     
     class Coordinator: NSObject, ObservableObject, ARSessionDelegate {
-        var primeAnchor: AnchorEntity
         var arView: ARView
         private var requests = [VNRequest]()
         var bufferSize: CGSize = .zero
@@ -52,9 +47,8 @@ struct ARViewContainer: UIViewRepresentable {
         
         var cancellables = Set<AnyCancellable>()
         
-        init(arView: ARView, primeAnchor: AnchorEntity, parent: ARViewContainer, results: ScanResults) {
+        init(arView: ARView, parent: ARViewContainer, results: ScanResults) {
             self.arView = arView
-            self.primeAnchor = primeAnchor
             self.parent = parent
             self.scannedResults = results
             
